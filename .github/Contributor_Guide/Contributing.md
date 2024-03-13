@@ -2,7 +2,7 @@
 
 Thank you for taking the time to contribute to <project_name>! We really appreciate it. 
 
-Before contributing, please make sure to read the [Code of Conduct](../CODE_OF_CONDUCT.md). We expect you to follow it in all your interactions with the project.
+Before contributing, please make sure to read the [Code of Conduct](../../CODE_OF_CONDUCT.md). We expect you to follow it in all your interactions with the project.
 
 ## New to <Project_Name>?
 
