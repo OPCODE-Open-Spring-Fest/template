@@ -1,3 +1,9 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["Issue:bug"]
+assignees:
+  - <project_manager>
 body:
   - type: markdown
     attributes:
