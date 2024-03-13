@@ -1,9 +1,9 @@
 name: Bug Report
 description: File a bug report
 title: "[Bug]: "
-labels: ["bug"]
+labels: ["Issue:bug"]
 assignees:
-  - project_manager
+  - <project_manager>
 body:
   - type: markdown
     attributes:
@@ -18,6 +18,48 @@ body:
       value: "Describe the issue happened"
     validations:
       required: true
+  - type: textarea
+    id: error-message
+    attributes:
+      label: Error message
+      description: If applicable, please provide the error message you received.
+      placeholder: Copy and paste the error message here
+    validations:
+      required: false
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is the bug?
+      options:
+        - Low
+        - Medium
+        - High
+        - Critical
+      value: Low
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Please provide detailed steps for reproducing the issue.
+      placeholder: Tell us how to reproduce the issue
+      value: "1. 2. 3."
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Please provide details about your environment.
+      placeholder: Tell us about your environment
+      value: "OS: \nBrowser: \nVersion: \nLanguage:..."
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem.
+      placeholder: Drag and drop your screenshots here
+
   - type: textarea
     id: logs
     attributes:
