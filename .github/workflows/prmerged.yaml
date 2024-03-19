@@ -22,6 +22,7 @@ jobs:
       - name: Send Data to API
         env:
           API_URL: https://osf-api.onrender.com/api/prmerged
+          API_AUTH_TOKEN: ${{ secrets.API_AUTH_TOKEN }}
         run: |
           payload=$(echo '{"owner":"${{ steps.get-pr-data.outputs.owner }}","labels":"${{ steps.get-pr-data.outputs.labels }}"}' | jq -R -s .)
-          curl -X POST -H "Content-Type: application/json" -d "$payload" "$API_URL"
+          curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $API_AUTH_TOKEN" -d "$payload" "$API_URL"
