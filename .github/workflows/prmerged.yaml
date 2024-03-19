@@ -1,0 +1,27 @@
+name: On Pull Request Merge
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+
+  on-merge:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged == true }}
+    steps:
+      - name: Get Pull Request Data
+        id: get-pr-data
+        env:
+          PULL_REQUEST_OWNER: ${{ github.event.pull_request.user.login }}
+          PULL_REQUEST_LABELS: ${{ join(github.event.pull_request.labels.*.name, ', ') }}
+        run: |
+          echo "::set-output name=owner::$PULL_REQUEST_OWNER"
+          echo "::set-output name=labels::$PULL_REQUEST_LABELS"
+
+      - name: Send Data to API
+        env:
+          API_URL: https://osf-api.onrender.com/api/prmerged
+        run: |
+          payload=$(echo '{"owner":"${{ steps.get-pr-data.outputs.owner }}","labels":"${{ steps.get-pr-data.outputs.labels }}"}' | jq -R -s .)
+          curl -X POST -H "Content-Type: application/json" -d "$payload" "$API_URL"
