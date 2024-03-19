@@ -1,2 +1,2 @@
 # template
-Template Repository for OpenSpringFest
+A Template Repository for OpenSpringFest
