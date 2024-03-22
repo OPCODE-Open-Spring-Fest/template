@@ -21,7 +21,7 @@ async function run() {
 
     const requiredLabels = [
       ['Type:Easy', 'Type:Medium', 'Type:Hard'],
-      ['Semver:Major', 'Semver:Minor', 'Semver:Patch'],
+      ['Semver:major', 'Semver:minor', 'Semver:patch'],
       ['PR:Accept'],
     ];
 
