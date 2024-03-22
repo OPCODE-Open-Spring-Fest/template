@@ -1,4 +1,4 @@
-name: Check PR Labels
+name: Label Checker
 
 on:
   pull_request:
@@ -9,16 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Check Labels
-        uses: topolov/pull-request-labeler@v1
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          must-have-labels: |
-            Type:Easy,Type:Medium,Type:Hard
-            Semver:major,Semver:minor,Semver:patch
-            PR:Accept
-          error-on-missing-labels: true
-          error-message: |
-            This pull request must have at least one label from each of the following groups:
-            - Type: Easy, Medium, Hard
-            - Semver: Major, Minor, Patch
+          node-version: 16
+      - name: Install dependencies
+        run: npm install @actions/github @actions/core
+      - name: Run Label Checker
+        run: node .github/workflows/label-checker.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
