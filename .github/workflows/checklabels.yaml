@@ -1,0 +1,24 @@
+name: Check PR Labels
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  check-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check Labels
+        uses: topolov/pull-request-labeler@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          must-have-labels: |
+            Type:Easy,Type:Medium,Type:Hard
+            Semver:major,Semver:minor,Semver:patch
+            PR:Accept
+          error-on-missing-labels: true
+          error-message: |
+            This pull request must have at least one label from each of the following groups:
+            - Type: Easy, Medium, Hard
+            - Semver: Major, Minor, Patch
