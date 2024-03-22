@@ -1,12 +1,12 @@
-const github = require('@actions/github');
-const core = require('@actions/core');
+import { getOctokit, context } from '@actions/github';
+import { setFailed } from '@actions/core';
 
 async function run() {
   try {
     const token = process.env.GITHUB_TOKEN;
-    const octokit = new github.getOctokit(token);
+    const octokit = new getOctokit(token);
 
-    const pullRequest = github.context.payload.pull_request;
+    const pullRequest = context.payload.pull_request;
     const owner = pullRequest.base.repo.owner.login;
     const repo = pullRequest.base.repo.name;
     const pullNumber = pullRequest.number;
@@ -30,12 +30,12 @@ async function run() {
     );
 
     if (!hasRequiredLabels) {
-      core.setFailed(
+      setFailed(
         'This pull request must have at least one label from each of the following groups: Type (Easy, Medium, Hard), Semver (Major, Minor, Patch), and PR:Accept.'
       );
     }
   } catch (error) {
-    core.setFailed(error.message);
+    setFailed(error.message);
   }
 }
 
