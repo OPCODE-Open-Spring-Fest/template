@@ -25,7 +25,7 @@ jobs:
 
       - name: Send Data to API
         env:
-          API_URL: https://osf-api.onrender.com/api/prmerged
+          API_URL: https://opcode.gymkhana.iiitbh.ac.in/api/prmerged
           API_AUTH_TOKEN: ${{ secrets.API_AUTH_TOKEN }}
         run: |
           payload=$(echo '{"owner":"${{ steps.get-pr-data.outputs.owner }}","labels":"${{ steps.get-pr-data.outputs.labels }}","repository_name":"${{ steps.get-pr-data.outputs.repo_name }}","repository_url":"${{ steps.get-pr-data.outputs.repo_url }}"}')
